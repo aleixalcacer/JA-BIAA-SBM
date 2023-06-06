@@ -7,3 +7,4 @@ networkx
 matplotlib
 seaborn
 jupyter
+opt_einsum
