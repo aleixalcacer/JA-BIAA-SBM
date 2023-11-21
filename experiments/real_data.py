@@ -110,16 +110,16 @@ for sim_i in tqdm(range(n_sims), leave=False):
     for k in tqdm(range(k_min, k_max), leave=False):
 
         biaa_model = None
-        for assigment, model in tqdm(list(product(assignments, models)), leave=False):
+        for assignment, model in tqdm(list(product(assignments, models)), leave=False):
             auc_j = -np.inf
             prauc_j = -np.inf
 
             best_model = None
             for rep_i in tqdm(range(n_reps), leave=False):
                 if model in [BiAA, DBiAA]:
-                    model_i = model((k, k), a_zero, likelihood="bernoulli", assignment=assigment, device="cuda")
+                    model_i = model((k, k), a_zero, likelihood="bernoulli", assignment=assignment, device="cuda")
                 else:
-                    model_i = model((k, k), a_zero, likelihood="bernoulli", assignment=assigment, device="cuda",
+                    model_i = model((k, k), a_zero, likelihood="bernoulli", assignment=assignment, device="cuda",
                                     biaa_model=biaa_model)
 
                 lr = 0.025
@@ -153,14 +153,15 @@ for sim_i in tqdm(range(n_sims), leave=False):
             # Save the results in a dataframe
 
             # auc and prauc
-            data = {"auc": auc_j, "prauc": prauc_j, "model": model.__name__, "assignment": assigment, "k": k, "iteration": sim_i}
+            data = {"auc": auc_j, "prauc": prauc_j, "model": model.__name__, "assignment": assignment, "k": k,
+                    "iteration": sim_i}
             results_i = pd.DataFrame(data=data, index=[0])
             results = pd.concat([results, results_i], ignore_index=True)
 
             # loss
             data = {"loss": best_model.losses[::20], "step": np.arange(len(best_model.losses))[::20],
                     "model": model.__name__,
-                    "assignment": assigment, "k": k, "iteration": sim_i}
+                    "assignment": assignment, "k": k, "iteration": sim_i}
             results_loss_i = pd.DataFrame(data=data)
             results_loss = pd.concat([results_loss, results_loss_i], ignore_index=True)
 

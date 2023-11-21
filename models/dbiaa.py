@@ -1,3 +1,5 @@
+import torch.nn
+
 from .utils import *
 
 
@@ -101,21 +103,11 @@ class DBiAA(torch.nn.Module):
 
     @property
     def a(self):
-        if self._likelihood == "bernoulli":
-            return torch.sigmoid(self._a)
-        elif self._likelihood == "poisson":
-            return torch.nn.functional.softplus(self._a)
-        else:
-            return self._a
+        return torch.sigmoid(self._a)
 
     @property
     def d(self):
-        if self._likelihood == "bernoulli":
-            return torch.sigmoid(self._d)
-        elif self._likelihood == "poisson":
-            return torch.nn.functional.softplus(self._d)
-        else:
-            return self._d
+        return torch.sigmoid(self._d)
 
     @property
     def A(self):

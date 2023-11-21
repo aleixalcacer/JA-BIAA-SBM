@@ -8,3 +8,4 @@ matplotlib
 seaborn
 jupyter
 opt_einsum
+archetypes @ git+https://github.com/aleixalcacer/archetypes@dev

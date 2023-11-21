@@ -119,28 +119,19 @@ class DSBM(torch.nn.Module):
 
     @property
     def a(self):
-        if self._likelihood == "bernoulli":
-            return torch.sigmoid(self._a)
-        elif self._likelihood == "poisson":
-            return torch.nn.functional.softplus(self._a)
-        else:
-            return self._a
+        return torch.sigmoid(self._a)
 
     @property
     def d(self):
-        if self._likelihood == "bernoulli":
-            return torch.sigmoid(self._d)
-        elif self._likelihood == "poisson":
-            return torch.nn.functional.softplus(self._d)
-        else:
-            return self._d
+        return torch.sigmoid(self._d)
+
 
     @property
     def Z(self):
         if self._likelihood == "bernoulli":
             return torch.sigmoid(self._Z)
         elif self._likelihood == "poisson":
-            return torch.nn.functional.softplus(self._Z)
+            return torch.relu(self._Z)
         else:
             return self._Z
 
