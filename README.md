@@ -20,11 +20,13 @@ The code is structured as follows:
 - `experiments/`: contains the code used to run the experiments.
 - `figures/`: contains the code used to generate the figures.
 - `models/`: contains the source code of the project.
-
+- `results/`: contains the results of the experiments.
+- 
 ## Run scripts
 
 To run the experiments in a remote server, run the following command:
 
 ```shell
-PYTHONPATH=. nohup python experiments/script_datasets.py {dataset} > {dataset}.log &
+PYTHONPATH=. nohup python experiments/real_data.py {dataset} > {dataset}.log &
+PYTHONPATH=. nohup python experiments/sim_data.py > sdata.log &
 ```
