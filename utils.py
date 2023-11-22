@@ -17,3 +17,4 @@ def create_palette(saturation, value, n_colors, int_colors=3):
 palette = sns.color_palette(create_palette(0.5, 0.95, 4, 1)(np.arange(4)))
 models_order = ["BiAA", "SBM", "DBiAA", "DSBM"]
 assignments_order = ["hard", "soft"]
+ndim_models_order = ["NAA", "NSBM", "DCNAA", "DCNSBM"]
