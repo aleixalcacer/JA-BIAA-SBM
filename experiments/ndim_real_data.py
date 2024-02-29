@@ -10,13 +10,13 @@ dataset = sys.argv[1]
 if dataset == "alyawarra":
     mat = scio.loadmat('datasets/irmdata/alyawarradata.mat')
     d = mat['Rs']
-    n_archetypes = (16, 16)
+    n_archetypes = (17, 17)
     relations = [0, 0]
 
 elif dataset == "uml":
     mat = scio.loadmat('datasets/irmdata/uml.mat')
     d = mat['Rs']
-    n_archetypes = (14, 14, 21)
+    n_archetypes = (15, 15, 22)
     relations = [0, 0, 1]
 
 else:
@@ -102,8 +102,8 @@ for sim_i in tqdm(range(n_sims), leave=False):
                     membership="soft",
                     device=device)
 
-            lr = 0.05
-            n_epochs = 2_000
+            lr = 0.025
+            n_epochs = 4_000
             model_i.fit(a_zero, n_epochs=n_epochs, learning_rate=lr)
 
             a_rec = model_i.estimated_data
